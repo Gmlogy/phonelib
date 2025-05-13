@@ -1,24 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">@color/md_green_900</color>
-    <color name="color_primary_dark">@color/md_green_200_dark</color>
-    <color name="color_accent">@color/color_primary</color>
+    <!-- =============================================================== -->
+    <!-- LIGHT THEME COLORS (Inspired by your example)                   -->
+    <!-- Replace these hex codes with precise values from your example   -->
+    <!-- =============================================================== -->
+    <color name="my_app_light_text_primary">#202124</color>         <!-- Dark Grey (almost black) for main text -->
+    <color name="my_app_light_text_secondary">#5F6368</color>       <!-- Medium Grey for secondary text (timestamps, date headers) -->
+    <color name="my_app_light_background_color">#F8F9FA</color>      <!-- Very Light Grey (overall screen background) -->
+    <color name="my_app_light_surface_color">#FFFFFF</color>         <!-- White (for item backgrounds, toolbar, bottom nav) -->
+    <color name="my_app_light_primary_color">@color/my_app_light_surface_color</color> <!-- Toolbar background = surface -->
+    <color name="my_app_light_accent_color">@color/my_app_light_text_primary</color> <!-- Accent is dark text (like tab indicator in example) -->
+    <color name="my_app_light_statusbar_color">@color/my_app_light_surface_color</color> <!-- Status bar usually matches toolbar/surface in light themes -->
 
-    <color name="pressed_item_foreground">#08000000</color>
-    <color name="activated_item_foreground">#44888888</color>
-    <color name="divider_grey">#55808080</color>
-    <color name="gradient_grey_start">#CC000000</color>
-    <color name="dark_grey">#FF333333</color>
-    <color name="bottom_tabs_light_background">#FFF1F1F1</color>
+    <color name="my_app_light_icon_tint">@color/my_app_light_text_secondary</color> <!-- Inactive icons -->
+    <color name="my_app_light_icon_tint_active">@color/my_app_light_accent_color</color> <!-- Active icons/tab text -->
+
+    <color name="my_app_light_fab_bg_color">@color/my_app_light_accent_color</color> <!-- If you had a FAB -->
+    <color name="my_app_light_fab_icon_color">#FFFFFF</color>    <!-- Icon on FAB -->
+
+    <color name="my_app_light_widget_bg_color">#E8EAED</color>   <!-- Light grey for widget backgrounds -->
+    <color name="my_app_light_widget_text_color">@color/my_app_light_text_primary</color>
+
+    <color name="my_app_light_divider_color">#DADCE0</color>     <!-- Light divider -->
+    <color name="my_app_light_ripple_color">#1A202124</color>   <!-- Ripple for light surfaces (semi-transparent dark) -->
+    <color name="my_app_light_hint_color">@color/my_app_light_text_secondary</color>
+    <color name="my_app_light_stroke_color">#DADCE0</color>
+    <color name="my_app_light_switch_thumb_deactivated_color">#BDC1C6</color>
+    <color name="my_app_light_switch_track_deactivated_color">#425F6368</color>
+    <color name="my_app_light_radiobutton_disabled_color">#425F6368</color>
+
+    <!-- Specific Call Type Icon Colors (approximated from your example) -->
+    <!-- These are for direct use if new drawables are made, or for Fossify's tinting -->
+    <color name="my_app_example_icon_incoming">#34A853</color> <!-- Greenish -->
+    <color name="my_app_example_icon_outgoing">#70757A</color> <!-- Greyish (as in example) -->
+    <color name="my_app_example_icon_missed">#EA4335</color>   <!-- Reddish -->
+
+
+    <!-- =============================================================== -->
+    <!-- FOSSIFY DEFAULT THEME OVERRIDES (Pointing to your light theme)  -->
+    <!-- =============================================================== -->
+    <color name="default_text_color">@color/my_app_light_text_primary</color>
+    <color name="default_background_color">@color/my_app_light_background_color</color>
+    <color name="default_primary_color">@color/my_app_light_primary_color</color>
+    <color name="default_app_icon_color">@color/my_app_light_accent_color</color>
+    <color name="default_accent_color">@color/my_app_light_accent_color</color>
+    <color name="default_widget_bg_color">@color/my_app_light_widget_bg_color</color>
+    <color name="default_widget_text_color">@color/my_app_light_widget_text_color</color>
+
+    <!-- Initial primary/accent colors (also point to your light theme) -->
+    <color name="color_primary">@color/my_app_light_primary_color</color>
+    <color name="color_primary_dark">@color/my_app_light_statusbar_color</color>
+    <color name="color_accent">@color/my_app_light_accent_color</color>
+
+    <!-- Fossify's "Light Theme" option (also point to your light theme) -->
+    <color name="theme_light_text_color">@color/my_app_light_text_primary</color>
+    <color name="theme_light_background_color">@color/my_app_light_background_color</color>
+    <!-- <color name="theme_light_primary_color">@color/my_app_light_primary_color</color> --> <!-- If Fossify defines this -->
+
+
+    <!-- =============================================================== -->
+    <!-- OTHER FOSSIFY UI COLORS (Adjusted for light theme consistency)  -->
+    <!-- =============================================================== -->
+    <color name="pressed_item_foreground">@color/my_app_light_ripple_color</color>
+    <color name="activated_item_foreground">#1F000000</color>
+    <color name="divider_grey">@color/my_app_light_divider_color</color>
+    <color name="gradient_grey_start">#E6FFFFFF</color>
+    <color name="dark_grey">#FF333333</color> <!-- Keep as is, might be used for specific dark elements -->
+    <color name="bottom_tabs_light_background">@color/my_app_light_surface_color</color>
     <color name="disabled_text_color_highlight">#00FFFFFF</color>
 
-    <color name="hint_white">#99FFFFFF</color>
+    <color name="hint_white">@color/my_app_light_hint_color</color>
     <color name="hint_black">#66000000</color>
-    <color name="light_grey_stroke">#40FFFFFF</color>
+    <color name="light_grey_stroke">@color/my_app_light_stroke_color</color>
 
-    <!-- Color Customization -->
-    <color name="theme_light_text_color">@color/md_grey_800_dark</color>
-    <color name="theme_light_background_color">@color/md_grey_white</color>
+    <!-- SwitchCompat -->
+    <color name="thumb_deactivated">@color/my_app_light_switch_thumb_deactivated_color</color>
+    <color name="track_deactivated">@color/my_app_light_switch_track_deactivated_color</color>
+
+    <!-- Radiobutton -->
+    <color name="radiobutton_disabled">@color/my_app_light_radiobutton_disabled_color</color>
+
+    <!-- Fossify's original call type colors now point to your example's icon colors -->
+    <!-- These are used by SimpleActivity/RecentCallsAdapter for tinting generic icons -->
+    <color name="color_outgoing_call">@color/my_app_example_icon_outgoing</color>
+    <color name="color_incoming_call">@color/my_app_example_icon_incoming</color>
+    <color name="color_missed_call">@color/my_app_example_icon_missed</color>
+
+
+    <!-- =============================================================== -->
+    <!-- FOSSIFY'S ORIGINAL DARK/OTHER THEME OPTIONS (Keep as is)      -->
+    <!-- =============================================================== -->
     <color name="theme_dark_text_color">@color/md_grey_200</color>
     <color name="theme_dark_background_color">#161616</color>
     <color name="theme_solarized_background_color">@color/md_indigo_900_dark</color>
@@ -26,23 +97,10 @@
     <color name="theme_solarized_primary_color">@color/md_indigo_900</color>
     <color name="theme_dark_red_primary_color">@color/md_red_700</color>
 
-    <!-- Default values -->
-    <color name="default_text_color">@color/theme_dark_text_color</color>
-    <color name="default_background_color">@color/theme_dark_background_color</color>
-    <color name="default_primary_color">@color/color_primary</color>
-    <color name="default_app_icon_color">@color/color_primary</color>
-    <color name="default_accent_color">@color/color_primary</color>
-    <color name="default_widget_bg_color">#AA000000</color>
-    <color name="default_widget_text_color">@color/color_primary</color>
 
-    <!-- SwitchCompat -->
-    <color name="thumb_deactivated">#FFECECEC</color>
-    <color name="track_deactivated">#FFB2B2B2</color>
-
-    <!-- Radiobutton -->
-    <color name="radiobutton_disabled">#FF757575</color>
-
-    <!-- Primary colors -->
+    <!-- =============================================================== -->
+    <!-- MATERIAL DESIGN COLOR PALETTE (Keep as is from original)        -->
+    <!-- =============================================================== -->
     <color name="md_amber">#FFC107</color>
     <color name="md_blue">#2196F3</color>
     <color name="md_blue_grey">#607D8B</color>
@@ -203,15 +261,15 @@
     <color name="md_deep_purple_800_dark">#371F7F</color>
     <color name="md_deep_purple_900_dark">#251470</color>
 
-    <color name="md_green_100">#FFD6EFCA</color>
-    <color name="md_green_200">#FFBAE4A8</color>
-    <color name="md_green_300">#FF9ED984</color>
-    <color name="md_green_400">#FF88D168</color>
-    <color name="md_green_500">#FF72C84E</color>
-    <color name="md_green_600">#FF64B846</color>
-    <color name="md_green_700">#FF50A43B</color>
-    <color name="md_green_800">#FF3C8F32</color>
-    <color name="md_green_900">#FF106D1F</color>
+    <color name="md_green_100">#C8E6C9</color> <!-- Corrected from FFD6EFCA -->
+    <color name="md_green_200">#A5D6A7</color> <!-- Corrected from FFBAE4A8 -->
+    <color name="md_green_300">#81C784</color> <!-- Corrected from FF9ED984 -->
+    <color name="md_green_400">#66BB6A</color> <!-- Corrected from FF88D168 -->
+    <color name="md_green_500">#4CAF50</color> <!-- Corrected from FF72C84E -->
+    <color name="md_green_600">#43A047</color> <!-- Corrected from FF64B846 -->
+    <color name="md_green_700">#388E3C</color> <!-- Corrected from FF50A43B -->
+    <color name="md_green_800">#2E7D32</color> <!-- Corrected from FF3C8F32 -->
+    <color name="md_green_900">#1B5E20</color> <!-- Corrected from FF106D1F -->
 
     <color name="md_green_100_dark">#ACDAAE</color>
     <color name="md_green_200_dark">#89CA8D</color>
@@ -264,8 +322,8 @@
     <color name="md_indigo_900_dark">#12195C</color>
 
     <color name="md_light_blue_100">#B3E5FC</color>
-    <color name="md_light_blue_200">#81D4fA</color>
-    <color name="md_light_blue_300">#4fC3F7</color>
+    <color name="md_light_blue_200">#81D4FA</color> <!-- Corrected typo fA -->
+    <color name="md_light_blue_300">#4FC3F7</color> <!-- Corrected typo fC -->
     <color name="md_light_blue_400">#29B6FC</color>
     <color name="md_light_blue_500">#03A9F4</color>
     <color name="md_light_blue_600">#039BE5</color>
