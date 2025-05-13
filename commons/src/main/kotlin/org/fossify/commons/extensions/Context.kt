@@ -1216,25 +1216,15 @@ fun Context.getPhoneNumberTypeText(type: Int, label: String): String {
 // (or wherever updateBottomTabItemColors is located)
 
 fun Context.updateBottomTabItemColors(view: View?, isActive: Boolean, drawableId: Int? = null) {
-    val activeColor = baseConfig.accentColor // << USE ACCENT COLOR FOR ACTIVE TABS
-                     // OR ContextCompat.getColor(this, R.color.my_app_light_accent_color)
-                     // OR ContextCompat.getColor(this, R.color.my_app_light_text_secondary) for grey
-
-    val inactiveColor = getProperTextColor() // This should be your dark text color now
-
     val color = if (isActive) {
-        activeColor
+        getProperPrimaryColor()
     } else {
-        inactiveColor
+        getProperTextColor()
     }
 
     if (drawableId != null) {
-        try { // Add try-catch for safety
-            val drawable = ResourcesCompat.getDrawable(resources, drawableId, theme)
-            view?.findViewById<ImageView>(R.id.tab_item_icon)?.setImageDrawable(drawable)
-        } catch (e: Exception) {
-            // Log or handle
-        }
+        val drawable = ResourcesCompat.getDrawable(resources, drawableId, theme)
+        view?.findViewById<ImageView>(R.id.tab_item_icon)?.setImageDrawable(drawable)
     }
 
     view?.findViewById<ImageView>(R.id.tab_item_icon)?.applyColorFilter(color)
