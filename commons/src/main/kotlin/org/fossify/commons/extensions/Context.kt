@@ -1212,16 +1212,29 @@ fun Context.getPhoneNumberTypeText(type: Int, label: String): String {
     }
 }
 
+// In fossify-commons/commons/src/main/kotlin/org/fossify/commons/extensions/Context.kt
+// (or wherever updateBottomTabItemColors is located)
+
 fun Context.updateBottomTabItemColors(view: View?, isActive: Boolean, drawableId: Int? = null) {
+    val activeColor = baseConfig.accentColor // << USE ACCENT COLOR FOR ACTIVE TABS
+                     // OR ContextCompat.getColor(this, R.color.my_app_light_accent_color)
+                     // OR ContextCompat.getColor(this, R.color.my_app_light_text_secondary) for grey
+
+    val inactiveColor = getProperTextColor() // This should be your dark text color now
+
     val color = if (isActive) {
-        getProperPrimaryColor()
+        activeColor
     } else {
-        getProperTextColor()
+        inactiveColor
     }
 
     if (drawableId != null) {
-        val drawable = ResourcesCompat.getDrawable(resources, drawableId, theme)
-        view?.findViewById<ImageView>(R.id.tab_item_icon)?.setImageDrawable(drawable)
+        try { // Add try-catch for safety
+            val drawable = ResourcesCompat.getDrawable(resources, drawableId, theme)
+            view?.findViewById<ImageView>(R.id.tab_item_icon)?.setImageDrawable(drawable)
+        } catch (e: Exception) {
+            // Log or handle
+        }
     }
 
     view?.findViewById<ImageView>(R.id.tab_item_icon)?.applyColorFilter(color)
