@@ -172,10 +172,6 @@ class ContactsHelper(val context: Context) {
                 var contactId = 0
                 var thumbnailUri = ""
                 var ringtone: String? = null
-                // --- START: MODIFICATION 1 ---
-                var timesContacted = 0
-                var lastTimeContacted = 0L
-                // --- END: MODIFICATION 1 ---
 
                 if (!gettingDuplicates) {
                     photoUri = cursor.getStringValue(CommonDataKinds.StructuredName.PHOTO_URI) ?: ""
@@ -183,10 +179,6 @@ class ContactsHelper(val context: Context) {
                     contactId = cursor.getIntValue(Data.CONTACT_ID)
                     thumbnailUri = cursor.getStringValue(CommonDataKinds.StructuredName.PHOTO_THUMBNAIL_URI) ?: ""
                     ringtone = cursor.getStringValue(CommonDataKinds.StructuredName.CUSTOM_RINGTONE)
-                    // --- START: MODIFICATION 2 ---
-                    timesContacted = cursor.getIntValue(Contacts.TIMES_CONTACTED)
-                    lastTimeContacted = cursor.getLongValue(Contacts.LAST_TIME_CONTACTED)
-                    // --- END: MODIFICATION 2 ---
                 }
 
                 val nickname = ""
@@ -201,10 +193,7 @@ class ContactsHelper(val context: Context) {
                 val ims = ArrayList<IM>()
                 val contact = Contact(
                     id, prefix, firstName, middleName, surname, suffix, nickname, photoUri, numbers, emails, addresses,
-                    events, accountName, starred, contactId, thumbnailUri, null, notes, groups, organization, websites, ims, mimetype, ringtone,
-                    // --- START: MODIFICATION 3 ---
-                    timesContacted, lastTimeContacted
-                    // --- END: MODIFICATION 3 ---
+                    events, accountName, starred, contactId, thumbnailUri, null, notes, groups, organization, websites, ims, mimetype, ringtone
                 )
 
                 contacts.put(id, contact)
@@ -781,18 +770,9 @@ class ContactsHelper(val context: Context) {
                 val organization = getOrganizations(id)[id] ?: Organization("", "")
                 val websites = getWebsites(id)[id] ?: ArrayList()
                 val ims = getIMs(id)[id] ?: ArrayList()
-                
-                // --- START: MODIFICATION 4 ---
-                val timesContacted = cursor.getIntValue(Contacts.TIMES_CONTACTED)
-                val lastTimeContacted = cursor.getLongValue(Contacts.LAST_TIME_CONTACTED)
-                // --- END: MODIFICATION 4 ---
-                
                 return Contact(
                     id, prefix, firstName, middleName, surname, suffix, nickname, photoUri, number, emails, addresses, events,
-                    accountName, starred, contactId, thumbnailUri, null, notes, groups, organization, websites, ims, mimetype, ringtone,
-                    // --- START: MODIFICATION 5 ---
-                    timesContacted, lastTimeContacted
-                    // --- END: MODIFICATION 5 ---
+                    accountName, starred, contactId, thumbnailUri, null, notes, groups, organization, websites, ims, mimetype, ringtone
                 )
             }
         }
@@ -890,7 +870,6 @@ class ContactsHelper(val context: Context) {
 
     private fun getContactSourceType(accountName: String) = getDeviceContactSources().firstOrNull { it.name == accountName }?.type ?: ""
 
-    // --- START: MODIFICATION 6 ---
     private fun getContactProjection() = arrayOf(
         Data.MIMETYPE,
         Data.CONTACT_ID,
@@ -904,12 +883,9 @@ class ContactsHelper(val context: Context) {
         CommonDataKinds.StructuredName.PHOTO_THUMBNAIL_URI,
         CommonDataKinds.StructuredName.STARRED,
         CommonDataKinds.StructuredName.CUSTOM_RINGTONE,
-        Contacts.TIMES_CONTACTED,
-        Contacts.LAST_TIME_CONTACTED,
         RawContacts.ACCOUNT_NAME,
         RawContacts.ACCOUNT_TYPE
     )
-    // --- END: MODIFICATION 6 ---
 
     private fun getSortString(): String {
         val sorting = context.baseConfig.sorting
@@ -1123,7 +1099,7 @@ class ContactsHelper(val context: Context) {
             // add websites
             contact.websites.forEach {
                 ContentProviderOperation.newInsert(Data.CONTENT_URI).apply {
-                    withValueBackReference(Data.RAW_CONTACT_ID, 0)
+                    withValue(Data.RAW_CONTACT_ID, contact.id)
                     withValue(Data.MIMETYPE, CommonDataKinds.Website.CONTENT_ITEM_TYPE)
                     withValue(CommonDataKinds.Website.URL, it)
                     withValue(CommonDataKinds.Website.TYPE, DEFAULT_WEBSITE_TYPE)
